@@ -4,13 +4,14 @@ import plotly.express as px
 import pandas as pd
 
 
-def _render_chart(file, x, y, title, labels, plot_color=None):
+def _render_chart(request, file, x, y, title, labels, plot_color=None):
     """ Helper method to render a plotly chart"""
 
+    # read csv and parse date as date for trendline function
     df = pd.read_csv(file)
-
     df['date'] = pd.to_datetime(df['date'])
 
+    # generate scatterplot
     fig = px.scatter(df,
                      x=x,
                      y=y,
@@ -22,43 +23,39 @@ def _render_chart(file, x, y, title, labels, plot_color=None):
                      trendline_color_override='darkred',
                      )
 
+    # update node colors
     fig.update_traces(marker={'color': plot_color})
 
+    # add average and standard deviation lines
     mean = df[y].mean()
-
+    std = df[y].std()
     fig.add_hline(
         y=mean,
         line_dash='dash',
         annotation_text='avg',
         annotation_font_size=20,
     )
-
     fig.add_hline(
-        y=mean + df[y].std(),
+        y=mean + std,
         line_dash='dot',
         annotation_text='+1 std',
         annotation_font_size=20,
     )
-
     fig.add_hline(
-        y=mean + df[y].std(),
-        line_dash='dot',
-        annotation_text='+1 std',
-        annotation_font_size=20,
-    )
-
-    fig.add_hline(
-        y=mean - df[y].std(),
+        y=mean - std,
         line_dash='dot',
         annotation_text='-1 std',
         annotation_font_size=20,
     )
 
-    return fig.to_html(full_html=False, include_plotlyjs=False)
+    chart = fig.to_html(full_html=False, include_plotlyjs=False)
+
+    return render(request, "dashboard/index.html", context={'chart': chart})
 
 
 def temperature(request):
-    chart = _render_chart(
+    return _render_chart(
+        request,
         file='dashboard/data/temp.csv',
         x='date',
         y='temp',
@@ -67,11 +64,10 @@ def temperature(request):
         plot_color='blue',
     )
 
-    return render(request, "dashboard/index.html", context={'chart': chart})
-
 
 def co2(request):
-    chart = _render_chart(
+    return _render_chart(
+        request,
         file='dashboard/data/co2.csv',
         x='date',
         y='co2',
@@ -79,11 +75,10 @@ def co2(request):
         labels={'date': 'Date', 'co2': 'PPM'},
     )
 
-    return render(request, "dashboard/index.html", context={'chart': chart})
-
 
 def humidity(request):
-    chart = _render_chart(
+    return _render_chart(
+        request,
         file='dashboard/data/humidity.csv',
         x='date',
         y='humidity',
