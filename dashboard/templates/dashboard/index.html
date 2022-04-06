@@ -11,8 +11,22 @@
 </head>
 <body>
 
-<nav class="flex fixed items-center justify-between flex-wrap bg-gray-800 p-3 fixed w-full z-10 top-0">
-    header
+<nav class="flex fixed h-16 items-center justify-between flex-wrap bg-gray-800 p-3 fixed w-full z-10 top-0">
+    <img
+            src="https://images.squarespace-cdn.com/content/v1/5f9d8fa82b8135545c3c76f7/1604161722835-NEJGLH5H4WXYWK06LZ5S/Smallhold_Logo.png?format=1500w"
+            class="h-full invert hidden md:block"
+    >
+    <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <a class="text-xl mx-4 px-2 border rounded-md" href="{% url 'temperature' %}">
+            Temperature
+        </a>
+        <a class="text-xl mx-4 px-2 border rounded-md" href="{% url 'co2' %}">
+            CO2
+        </a>
+        <a class="text-xl mx-4 px-2 border rounded-md" href="{% url 'humidity' %}">
+            Humidity
+        </a>
+    </div>
 </nav>
 
 <main id="main-body" class="container w-full mt-16 h-5/6">

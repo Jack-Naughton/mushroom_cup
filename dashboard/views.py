@@ -49,7 +49,7 @@ def humidity(request):
         x='date',
         y='humidity',
         title='Humidity',
-        labels={'date': 'Date', 'co2': '% Humidity'}
+        labels={'date': 'Date', 'humidity': '% Humidity'}
     )
 
     return render(request, "dashboard/index.html", context={'chart': chart})
