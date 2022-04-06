@@ -9,12 +9,43 @@ def _render_chart(file, x, y, title, labels):
 
     df = pd.read_csv(file)
 
-    fig = px.line(df,
-                  x=x,
-                  y=y,
-                  title=title,
-                  labels=labels
-                  )
+    fig = px.scatter(df,
+                     x=x,
+                     y=y,
+                     title=title,
+                     labels=labels,
+                     )
+
+    mean = df[y].mean()
+
+    fig.add_hline(
+        y=mean,
+        line_dash='dash',
+        annotation_text='avg',
+        annotation_font_size=20,
+        annotation_font_color='red',
+    )
+
+    fig.add_hline(
+        y=mean + df[y].std(),
+        line_dash='dot',
+        annotation_text='+1 std',
+        annotation_font_size=20,
+    )
+
+    fig.add_hline(
+        y=mean + df[y].std(),
+        line_dash='dot',
+        annotation_text='+1 std',
+        annotation_font_size=20,
+    )
+
+    fig.add_hline(
+        y=mean - df[y].std(),
+        line_dash='dot',
+        annotation_text='-1 std',
+        annotation_font_size=20,
+    )
 
     return fig.to_html(full_html=False, include_plotlyjs=False)
 
