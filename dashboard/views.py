@@ -4,46 +4,52 @@ import plotly.express as px
 import pandas as pd
 
 
-def temperature(request):
-    df = pd.read_csv('dashboard/data/temp.csv')
+def _render_chart(file, x, y, title, labels):
+    """ Helper method to render a plotly chart"""
+
+    df = pd.read_csv(file)
 
     fig = px.line(df,
-                  x="date",
-                  y="temp",
-                  title='Temperature',
-                  labels={'date': 'Date', 'temp': 'Degrees Fahrenheit'}
+                  x=x,
+                  y=y,
+                  title=title,
+                  labels=labels
                   )
 
-    plot_div = fig.to_html(full_html=False, include_plotlyjs=False)
+    return fig.to_html(full_html=False, include_plotlyjs=False)
 
-    return render(request, "dashboard/index.html", context={'plot_div': plot_div})
+
+def temperature(request):
+    chart = _render_chart(
+        file='dashboard/data/temp.csv',
+        x='date',
+        y='temp',
+        title='Temperature',
+        labels={'date': 'Date', 'temp': 'Degrees Fahrenheit'}
+    )
+
+    return render(request, "dashboard/index.html", context={'chart': chart})
 
 
 def co2(request):
-    df = pd.read_csv('dashboard/data/co2.csv')
+    chart = _render_chart(
+        file='dashboard/data/co2.csv',
+        x='date',
+        y='co2',
+        title='CO2',
+        labels={'date': 'Date', 'co2': 'PPM'}
+    )
 
-    fig = px.line(df,
-                  x="date",
-                  y="co2",
-                  title='CO2',
-                  labels={'date': 'Date', 'co2': 'PPM'}
-                  )
-
-    plot_div = fig.to_html(full_html=False, include_plotlyjs=False)
-
-    return render(request, "dashboard/index.html", context={'plot_div': plot_div})
+    return render(request, "dashboard/index.html", context={'chart': chart})
 
 
 def humidity(request):
-    df = pd.read_csv('dashboard/data/humidity.csv')
+    chart = _render_chart(
+        file='dashboard/data/humidity.csv',
+        x='date',
+        y='humidity',
+        title='Humidity',
+        labels={'date': 'Date', 'co2': '% Humidity'}
+    )
 
-    fig = px.line(df,
-                  x="date",
-                  y="humidity",
-                  title='Humidity',
-                  labels={'date': 'Date', 'humidity': '% Humidity'}
-                  )
-
-    plot_div = fig.to_html(full_html=False, include_plotlyjs=False)
-
-    return render(request, "dashboard/index.html", context={'plot_div': plot_div})
+    return render(request, "dashboard/index.html", context={'chart': chart})
