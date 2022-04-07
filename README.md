@@ -2,11 +2,13 @@
 
 A simple dashboard visualizing the total dataset with rolling-average trends (using https://plotly.com/).
 
+This project relies on docker. If you don't have it installed or run into issues, you can view it at https://jacknaughton.com/mushroom_cup (I will remove this once the application process if done)
+
 To run me, first clone and enter:
 * `git clone https://github.com/Jack-Naughton/mushroom_cup.git; cd mushroom_cup`
 
-Then execute the provided helper shell script
-* `source mushroom_time.sh`
+Then spin it up with docker
+* `docker compose up`
 
 Finally, navigate home and view the 3 dashboards
 * `http://localhost:8000/`
