@@ -7,7 +7,7 @@ This project relies on docker. If you don't have it installed or run into issues
 To run me, first clone and enter:
 * `git clone https://github.com/Jack-Naughton/mushroom_cup.git; cd mushroom_cup`
 
-Then spin it up with docker
+Then spin it up with docker (may take a few minutes the first time)
 * `docker compose up`
 
 Finally, navigate home and view the 3 dashboards
