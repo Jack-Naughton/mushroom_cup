@@ -14,11 +14,6 @@ Finally, navigate home and view the 3 dashboards
 * `http://localhost:8000/`
 
 
-## Installed Requirements
-* django
-* pandas
-* plotly
-
 ## Notes
 Each dashboard shows all 10,000 data points per dataset.
 
