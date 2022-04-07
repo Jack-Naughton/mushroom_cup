@@ -16,3 +16,12 @@ Finally, navigate home and view the 3 dashboards
 * django
 * pandas
 * plotly
+
+## Notes
+Each dashboard shows all 10,000 data points per dataset.
+
+Outliers ( > 3 standard deviations) are shown in red.
+
+Plotly behavior allows for zooming / panning via click-and-drag.
+
+Thank you for the opportunity!
