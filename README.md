@@ -6,7 +6,7 @@ To run me, first clone and enter:
 * `git clone git@github.com:Jack-Naughton/mushroom_cup.git; cd mushroom_cup`
 
 Then execute the provided helper shell script
-* `sh mushroom_time.sh`
+* `source mushroom_time.sh`
 
 Finally, navigate home and view the 3 dashboards
 * `http://localhost:8000/`
