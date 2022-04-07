@@ -99,5 +99,3 @@ def humidity(request):
         labels={'date': 'Date', 'humidity': '% Humidity'},
         plot_color='green',
     )
-
-    return render(request, "dashboard/index.html", context={'chart': chart})
